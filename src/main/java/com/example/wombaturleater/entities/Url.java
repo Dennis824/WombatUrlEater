@@ -10,17 +10,43 @@ import java.util.Date;
 @Table(name = "url")
 public class Url {
 
+    public Url() {
+    }
+
+    public Url(String longUrl) {
+        this.longUrl = longUrl;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(name = "long_url")
     private String longUrl;
 
-    @Column(nullable = false)
-    private Date createdDate;
 
+//    @Column(name = "createdDate")
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date createdDate;
 
+//    @Column(name = "shortUrl")
+//    private String shortUrl;
+
+//    @Transient
+//    private boolean expired; // Hibernate will ignore this field. default false.
+
+//    public String getShortUrl() {
+//        return shortUrl;
+//    }
+//
+//    public Url(String longUrl) {
+//        this.longUrl = longUrl;
+//    }
+//
+//    public void setShortUrl(String shortUrl) {
+//        this.shortUrl = shortUrl;
+//    }
 
     public long getId() {
         return id;
@@ -39,12 +65,12 @@ public class Url {
         this.longUrl = longUrl;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+//    public Date getCreatedDate() {
+//        return createdDate;
+//    }
+//
+//    public void setCreatedDate(Date createdDate) {
+//        this.createdDate = createdDate;
+//    }
 
 }
