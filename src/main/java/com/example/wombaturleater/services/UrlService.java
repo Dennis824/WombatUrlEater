@@ -1,8 +1,10 @@
 package com.example.wombaturleater.services;
 
+import com.example.wombaturleater.entities.Person;
 import com.example.wombaturleater.entities.Url;
 import com.example.wombaturleater.repository.UrlRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,28 +20,30 @@ public class UrlService {
 //    private final BaseConversion conversion;
 
 
+    @Autowired
     public UrlService(UrlRepository urlRepository) {
         this.urlRepository = urlRepository;
     }
 
     public List<Url> findAll() {
-        System.out.println("Finding all");
         return urlRepository.findAll();
     }
 
+    @Transactional
     public void save(Url url) {
-        System.out.println("saving  " + url.getLongUrl());
         urlRepository.save(url);
     }
 
+    // todo
+//    public Optional<Url> getUrlByLongUrl(String longUrl) {
+//        return urlRepository.findByUrlLongName(longUrl);
+//    }
     @Transactional
     public void delete(int id) {
-        System.out.println("deleting " + id);
         urlRepository.deleteById(id);
     }
 
     public Url findOne(int id) {
-        System.out.println("finding " + id);
         Optional<Url> foundUrl = urlRepository.findById(id);
         return foundUrl.orElse(null);
     }

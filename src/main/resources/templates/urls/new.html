@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New url</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/urls}" th:object="${url}">
+    <label for="longUrl">Enter Url: </label>
+    <input type="text" th:field="*{longUrl}" id="longUrl"/>
+    <br/>
+
+    <input type="submit" value="Create!"/>
+</form>
+
+</body>
+</html>
