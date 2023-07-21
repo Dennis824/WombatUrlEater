@@ -6,9 +6,9 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/urls}" th:object="${url}">
-    <label for="longUrl">Enter Url: </label>
-    <input type="text" th:field="*{longUrl}" id="longUrl"/>
+<form th:method="POST" th:action="@{/links}" th:object="${link}">
+    <label for="longLink">Enter Url: </label>
+    <input type="text" th:field="*{longLink}" id="longLink"/>
     <br/>
 
     <input type="submit" value="Create!"/>

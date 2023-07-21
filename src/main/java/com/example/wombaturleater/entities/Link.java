@@ -7,14 +7,14 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "url")
-public class Url {
+@Table(name = "link")
+public class Link {
 
-    public Url() {
+    public Link() {
     }
 
-    public Url(String longUrl) {
-        this.longUrl = longUrl;
+    public Link(String longLink) {
+        this.longLink = longLink;
     }
 
     @Id
@@ -22,8 +22,9 @@ public class Url {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "long_url")
-    private String longUrl;
+    @Column(name = "long_link")
+    private String longLink;
+
 
 
 //    @Column(name = "createdDate")
@@ -36,12 +37,14 @@ public class Url {
 //    @Transient
 //    private boolean expired; // Hibernate will ignore this field. default false.
 
-//    public String getShortUrl() {
-//        return shortUrl;
-//    }
+
 //
 //    public Url(String longUrl) {
 //        this.longUrl = longUrl;
+//    }
+
+//    public String getShortUrl() {
+//        return shortUrl;
 //    }
 //
 //    public void setShortUrl(String shortUrl) {
@@ -56,14 +59,14 @@ public class Url {
         this.id = id;
     }
 
-
-    public String getLongUrl() {
-        return longUrl;
+    public String getLongLink() {
+        return longLink;
     }
 
-    public void setLongUrl(String longUrl) {
-        this.longUrl = longUrl;
+    public void setLongLink(String longLink) {
+        this.longLink = longLink;
     }
+
 
 //    public Date getCreatedDate() {
 //        return createdDate;
