@@ -27,9 +27,9 @@ public class Link {
 
 
 
-//    @Column(name = "createdDate")
-//    @Temporal(TemporalType.TIMESTAMP)
-//    private Date createdDate;
+    @Column(name = "created_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
 
     @Column(name = "short_link")
     private String shortLink;
@@ -63,12 +63,12 @@ public class Link {
     }
 
 
-//    public Date getCreatedDate() {
-//        return createdDate;
-//    }
-//
-//    public void setCreatedDate(Date createdDate) {
-//        this.createdDate = createdDate;
-//    }
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
 
 }

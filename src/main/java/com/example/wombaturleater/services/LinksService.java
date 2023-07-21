@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class LinksService {
 
-    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?=()&-/";
 
     private static final int    BASE     = ALPHABET.length();
 
@@ -36,6 +37,7 @@ public class LinksService {
 
     @Transactional
     public void save(Link link) {
+//        link.setCreatedDate(new Date());
         link.setShortLink(cutter(link.getLongLink()));
         linksRepository.save(link);
     }
