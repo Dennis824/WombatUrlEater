@@ -31,25 +31,20 @@ public class Link {
 //    @Temporal(TemporalType.TIMESTAMP)
 //    private Date createdDate;
 
-//    @Column(name = "shortUrl")
-//    private String shortUrl;
+    @Column(name = "short_link")
+    private String shortLink;
 
+    public String getShortLink() {
+        return shortLink;
+    }
+
+    public void setShortLink(String shortLink) {
+        this.shortLink = shortLink;
+    }
 //    @Transient
 //    private boolean expired; // Hibernate will ignore this field. default false.
 
 
-//
-//    public Url(String longUrl) {
-//        this.longUrl = longUrl;
-//    }
-
-//    public String getShortUrl() {
-//        return shortUrl;
-//    }
-//
-//    public void setShortUrl(String shortUrl) {
-//        this.shortUrl = shortUrl;
-//    }
 
     public long getId() {
         return id;

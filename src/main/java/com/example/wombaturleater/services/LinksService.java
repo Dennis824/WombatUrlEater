@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
@@ -35,23 +36,24 @@ public class LinksService {
 
     @Transactional
     public void save(Link link) {
+        link.setShortLink(cutter(link.getLongLink()));
         linksRepository.save(link);
     }
 
-    //todo return type URL
-    public void cutter(URL url){
+    public String cutter(String longLinkName){
         StringBuffer sb = new StringBuffer();
         String result = null;
-        String strURL = url.toString();
-        URL aURL = url;
-        sb.append(url);
-
-//            System.out.println("*** -> " + strURL.substring(19));
+        URL aURL = null;
+        try {
+            aURL = new URL(longLinkName);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+        sb.append(longLinkName);
         String host = cutParts(aURL);
+        result = host +"/"+ encode(decode(longLinkName.substring(getProtocol(aURL)+ host.length())));
 
-        result = host +"/"+ encode(decode(strURL.substring(getProtocol(aURL)+ host.length())));
-        System.out.println(result);
-
+        return result;
 
     }
 
