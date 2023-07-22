@@ -37,7 +37,7 @@ public class LinksService {
 
     @Transactional
     public void save(Link link) {
-//        link.setCreatedDate(new Date());
+        link.setCreatedDate(new Date());
         link.setShortLink(cutter(link.getLongLink()));
         linksRepository.save(link);
     }
