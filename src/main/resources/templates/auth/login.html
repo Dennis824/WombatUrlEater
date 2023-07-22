@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login page</title>
+</head>
+<body>
+
+<form name="f" method="post" action="/process_login">
+
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+  <label for="personName">enter your name</label>
+  <input type="text" name="personName" id="personName">
+  <br/>
+  <label for="password">enter your password</label>
+  <input type="text" name="password" id="password">
+  <br/>
+  <input type="submit" value="Login"/>
+
+  <div th:if="${param.error}" style="color: red">
+    Incorrect username or password</div>
+
+</form>
+
+</body>
+</html>

@@ -1,12 +1,9 @@
 package com.example.wombaturleater.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Person")
@@ -21,9 +18,47 @@ public class Person {
     @Column(name = "person_name")
     private String personName;
 
+    @Min(value = 1900, message = "The year of birth must be greater than 1900")
+    @Column(name = "year_of_birth")
+    private int yearOfBirth;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name= "role")
+    private String role;
+
+    public Person(String personName, int yearOfBirth) {
+        this.personName = personName;
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Person() {
     }
 
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
+    }
 
 
     public int getId() {

@@ -2,7 +2,9 @@ package com.example.wombaturleater.util;
 
 import com.example.wombaturleater.entities.Person;
 import com.example.wombaturleater.services.PeopleService;
+import com.example.wombaturleater.services.PersonDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -11,10 +13,12 @@ import org.springframework.validation.Validator;
 public class PersonValidator implements Validator {
 
     private final PeopleService peopleService;
+    private final PersonDetailsService personDetailsService;
 
     @Autowired
-    public PersonValidator(PeopleService peopleService) {
+    public PersonValidator(PeopleService peopleService, PersonDetailsService personDetailsService) {
         this.peopleService = peopleService;
+        this.personDetailsService = personDetailsService;
     }
 
     @Override
@@ -25,8 +29,13 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Person person = (Person) o;
+        try {
+            //TODO rework this block
+            personDetailsService.loadUserByUsername(person.getPersonName());
 
-        if (peopleService.getPersonByName(person.getPersonName()).isPresent())
-            errors.rejectValue("fullName", "", "Человек с таким ФИО уже существует");
+        } catch (UsernameNotFoundException ignored) {
+            return;
+        }
+        errors.rejectValue("username", "", "Person with this name already exists");
     }
 }
