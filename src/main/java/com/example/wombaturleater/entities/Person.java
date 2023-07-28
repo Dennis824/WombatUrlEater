@@ -13,10 +13,10 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty(message = "The name should not be empty")
-    @Size(min = 2, max = 100, message = "The name must be between 2 and 100 characters long")
-    @Column(name = "person_name")
-    private String personName;
+    @NotEmpty(message = "Name cannot be empty")
+    @Size(min = 2, max = 100, message = "Name length must be from 2 to 100 symbols")
+    @Column(name = "username")
+    private String username;
 
     @Min(value = 1900, message = "The year of birth must be greater than 1900")
     @Column(name = "year_of_birth")
@@ -28,8 +28,43 @@ public class Person {
     @Column(name= "role")
     private String role;
 
-    public Person(String personName, int yearOfBirth) {
-        this.personName = personName;
+    public Person() {
+    }
+
+    public Person(String username, int yearOfBirth) {
+        this.username = username;
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public void setYearOfBirth(int yearOfBirth) {
         this.yearOfBirth = yearOfBirth;
     }
 
@@ -41,39 +76,13 @@ public class Person {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Person() {
-    }
-
-    public int getYearOfBirth() {
-        return yearOfBirth;
-    }
-
-    public void setYearOfBirth(int yearOfBirth) {
-        this.yearOfBirth = yearOfBirth;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPersonName() {
-        return personName;
-    }
-
-    public void setPersonName(String personName) {
-        this.personName = personName;
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", yearOfBirth=" + yearOfBirth +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

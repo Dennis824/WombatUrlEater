@@ -29,8 +29,8 @@ public class PeopleService {
         return foundPerson.orElse(null);
     }
 
-    public Optional<Person> getPersonByName(String name) {
-        return peopleRepository.findByPersonName(name);
+    public Optional<Person> getPersonByUsername(String username) {
+        return peopleRepository.findByUsername(username);
     }
 
     @Transactional

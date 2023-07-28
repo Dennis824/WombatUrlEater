@@ -31,7 +31,7 @@ public class PersonValidator implements Validator {
         Person person = (Person) o;
         try {
             //TODO rework this block
-            personDetailsService.loadUserByUsername(person.getPersonName());
+            personDetailsService.loadUserByUsername(person.getUsername());
 
         } catch (UsernameNotFoundException ignored) {
             return;

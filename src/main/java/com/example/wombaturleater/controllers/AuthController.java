@@ -35,7 +35,6 @@ public class AuthController {
     public String registrationPage(@ModelAttribute("person") Person person){
         return "auth/registration";
     }
-
     @PostMapping("/registration")
     public String performanceRegistration(@ModelAttribute("person") @Valid Person person,
                                           BindingResult bindingResult) {
