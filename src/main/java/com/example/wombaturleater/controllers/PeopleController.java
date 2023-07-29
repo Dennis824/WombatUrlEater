@@ -37,10 +37,10 @@ public class PeopleController {
         return "people/show";
     }
 
-    @GetMapping("/new")
-    public String newPerson(@ModelAttribute("person") Person person) {
-        return "people/new";
-    }
+//    @GetMapping("/new")
+//    public String newPerson(@ModelAttribute("person") Person person) {
+//        return "people/new";
+//    }
 
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid Person person,

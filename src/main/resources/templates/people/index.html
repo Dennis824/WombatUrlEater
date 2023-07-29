@@ -12,7 +12,7 @@
 <!--</div>-->
 <div th:each="person : ${people}">
     <a th:href="@{/people/{id}(id=${person.getId()})}"
-       th:text="${person.getPersonName()}">user</a>
+       th:text="${person.getUsername()}">user</a>
 </div>
 <br>
 <p><img src="/background/wombat.jpg"></p>

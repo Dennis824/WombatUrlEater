@@ -45,4 +45,9 @@ public class AuthController {
         registrationService.register(person);
         return "redirect:/auth/login";
     }
+
+    @GetMapping("/hello")
+    public String helloPage(){
+        return "auth/hello";
+    }
 }
