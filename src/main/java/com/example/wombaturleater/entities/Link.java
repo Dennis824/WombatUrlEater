@@ -35,6 +35,10 @@ public class Link {
     @Column(name = "short_link")
     private String shortLink;
 
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person owner;
+
     public String getShortLink() {
         return shortLink;
     }
@@ -70,6 +74,15 @@ public class Link {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
     }
 
 }
