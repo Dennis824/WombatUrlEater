@@ -1,8 +1,12 @@
 package com.example.wombaturleater.services;
 
 import com.example.wombaturleater.entities.Link;
+import com.example.wombaturleater.entities.Person;
 import com.example.wombaturleater.repository.LinksRepository;
+import com.example.wombaturleater.repository.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,14 +25,21 @@ public class LinksService {
 
     private static final int    BASE     = ALPHABET.length();
 
+    private final PeopleService peopleService;
 
     private final LinksRepository linksRepository;
 //    private final BaseConversion conversion;
 
+    private final PersonDetailsService personDetailsService;
+
+    private final PeopleRepository peropleRepository;
 
     @Autowired
-    public LinksService(LinksRepository linksRepository) {
+    public LinksService(PeopleService peopleService, LinksRepository linksRepository, PersonDetailsService personDetailsService, PeopleRepository peropleRepository) {
+        this.peopleService = peopleService;
         this.linksRepository = linksRepository;
+        this.personDetailsService = personDetailsService;
+        this.peropleRepository = peropleRepository;
     }
 
     public List<Link> findAll() {
@@ -38,6 +49,21 @@ public class LinksService {
     @Transactional
     public void save(Link link) {
         link.setCreatedDate(new Date());
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentPrincipalName = authentication.getName();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+//        int id = peopleService
+        Optional<Person> optPerson =  peropleRepository.findByUsername(username);
+        if(optPerson.isPresent()){
+            Person person = optPerson.get();
+            int id = person.getId();
+            link.setOwner(person);
+        }
+
+//                personDetailsService.loadUserByUsername(username).getUsername();
+//        Person person = peopleService.findOne(id);
+
         link.setShortLink(cutter(link.getLongLink()));
         linksRepository.save(link);
     }
