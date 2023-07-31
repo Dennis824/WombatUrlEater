@@ -36,7 +36,11 @@ public class Person {
         this.yearOfBirth = yearOfBirth;
     }
 
-    public String getRole() {
+    public Person(String username) {
+        this.username = username;
+    }
+
+      public String getRole() {
         return role;
     }
 
