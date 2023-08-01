@@ -25,7 +25,7 @@ public class LinksController {
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("links", linksService.findAllPersonLinks());
+        model.addAttribute("links", linksService.findAllOwnerLinks());
         return "links/index";
     }
 

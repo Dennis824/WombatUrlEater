@@ -46,23 +46,31 @@ public class LinksService {
     public List<Link> findAll() {
         return linksRepository.findAll();
     }
-    public List<Link> findAllPersonLinks() {
+    public List<Link> findAllOwnerLinks() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        Optional<Person> optPerson = peopleRepository.findByUsername(username);
-        List<Link> list = Collections.emptyList();
-        if (optPerson.isPresent()) {
+        Optional<Person> optPerson =  peopleRepository.findByUsername(username);
+        if(optPerson.isPresent()){
             Person person = optPerson.get();
             int id = person.getId();
-            Optional<Link> optLink = linksRepository.findById(id);
-            if (optLink.isPresent()) {
-                list = optLink.stream().toList();
+            return linksRepository.findAllLinksByOwner(id);
+        } else return Collections.emptyList();
 
-                return list;
-            }
-
-        }
-        return list;
+//        Optional<Person> optPerson = peopleRepository.findByUsername(username);
+//
+////        List<Link> list = Collections.emptyList();
+//        if (optPerson.isPresent()) {
+//            Person person = optPerson.get();
+//            int id = person.getId();
+//            Optional<Link> optLink = linksRepository.findById(id);
+//            if (optLink.isPresent()) {
+//                List<Link>  list = optLink.stream().toList();
+//
+//                return list;
+//            }
+//
+//        }
+//        return  Collections.emptyList();
     }
 
 
