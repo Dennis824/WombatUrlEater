@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "Person")
@@ -27,6 +28,9 @@ public class Person {
 
     @Column(name= "role")
     private String role;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Link> links;
 
     public Person() {
     }
@@ -78,6 +82,11 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public List<Link> getLinks() {
+        return links;
     }
 
     @Override

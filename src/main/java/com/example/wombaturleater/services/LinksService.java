@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -32,19 +33,40 @@ public class LinksService {
 
     private final PersonDetailsService personDetailsService;
 
-    private final PeopleRepository peropleRepository;
+    private final PeopleRepository peopleRepository;
 
     @Autowired
-    public LinksService(PeopleService peopleService, LinksRepository linksRepository, PersonDetailsService personDetailsService, PeopleRepository peropleRepository) {
+    public LinksService(PeopleService peopleService, LinksRepository linksRepository, PersonDetailsService personDetailsService, PeopleRepository peopleRepository) {
         this.peopleService = peopleService;
         this.linksRepository = linksRepository;
         this.personDetailsService = personDetailsService;
-        this.peropleRepository = peropleRepository;
+        this.peopleRepository = peopleRepository;
     }
 
     public List<Link> findAll() {
         return linksRepository.findAll();
     }
+    public List<Link> findAllPersonLinks() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Optional<Person> optPerson = peopleRepository.findByUsername(username);
+        List<Link> list = Collections.emptyList();
+        if (optPerson.isPresent()) {
+            Person person = optPerson.get();
+            int id = person.getId();
+            Optional<Link> optLink = linksRepository.findById(id);
+            if (optLink.isPresent()) {
+                list = optLink.stream().toList();
+
+                return list;
+            }
+
+        }
+        return list;
+    }
+
+
+
 
     @Transactional
     public void save(Link link) {
@@ -54,7 +76,7 @@ public class LinksService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 //        int id = peopleService
-        Optional<Person> optPerson =  peropleRepository.findByUsername(username);
+        Optional<Person> optPerson =  peopleRepository.findByUsername(username);
         if(optPerson.isPresent()){
             Person person = optPerson.get();
             int id = person.getId();
