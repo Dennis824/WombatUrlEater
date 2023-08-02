@@ -1,15 +1,14 @@
 package com.example.wombaturleater.controllers;
 
-import com.example.wombaturleater.entities.Person;
 import com.example.wombaturleater.services.PeopleService;
 import com.example.wombaturleater.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/people")
@@ -38,22 +37,6 @@ public class PeopleController {
         return "people/show";
     }
 
-//    @GetMapping("/new")
-//    public String newPerson(@ModelAttribute("person") Person person) {
-//        return "people/new";
-//    }
-
-//    @PostMapping()
-//    public String create(@ModelAttribute("person") @Valid Person person,
-//                         BindingResult bindingResult) {
-//        personValidator.validate(person, bindingResult);
-//
-//        if (bindingResult.hasErrors())
-//            return "people/new";
-//
-//        peopleService.save(person);
-//        return "redirect:/people";
-//    }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {

@@ -53,7 +53,8 @@ public class PeopleService {
 
         if (person.isPresent()) {
             Hibernate.initialize(person.get().getLinks());
-//todo expiration link time
+//todo
+//             expiration link time
 //            // check time of link assignment
 //            person.get().getLinks().forEach(link -> {
 //                long diffInMillies = Math.abs(link.getCreatedDate().getTime() - new Date().getTime());

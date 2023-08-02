@@ -46,6 +46,7 @@ public class LinksService {
     public List<Link> findAll() {
         return linksRepository.findAll();
     }
+
     public List<Link> findAllOwnerLinks() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -54,23 +55,9 @@ public class LinksService {
             Person person = optPerson.get();
             int id = person.getId();
             return linksRepository.findAllLinksByOwner(id);
-        } else return Collections.emptyList();
-
-//        Optional<Person> optPerson = peopleRepository.findByUsername(username);
-//
-////        List<Link> list = Collections.emptyList();
-//        if (optPerson.isPresent()) {
-//            Person person = optPerson.get();
-//            int id = person.getId();
-//            Optional<Link> optLink = linksRepository.findById(id);
-//            if (optLink.isPresent()) {
-//                List<Link>  list = optLink.stream().toList();
-//
-//                return list;
-//            }
-//
-//        }
-//        return  Collections.emptyList();
+        } else {
+            return Collections.emptyList();
+        }
     }
 
 
@@ -79,21 +66,13 @@ public class LinksService {
     @Transactional
     public void save(Link link) {
         link.setCreatedDate(new Date());
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentPrincipalName = authentication.getName();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-//        int id = peopleService
         Optional<Person> optPerson =  peopleRepository.findByUsername(username);
         if(optPerson.isPresent()){
             Person person = optPerson.get();
-            int id = person.getId();
             link.setOwner(person);
         }
-
-//                personDetailsService.loadUserByUsername(username).getUsername();
-//        Person person = peopleService.findOne(id);
-
         link.setShortLink(cutter(link.getLongLink()));
         linksRepository.save(link);
     }
@@ -115,11 +94,6 @@ public class LinksService {
 
     }
 
-
-    // todo
-//    public Optional<Url> getUrlByLongUrl(String longUrl) {
-//        return urlRepository.findByUrlLongName(longUrl);
-//    }
     @Transactional
     public void delete(int id) {
         linksRepository.deleteById(id);
@@ -158,20 +132,4 @@ public class LinksService {
         return url.getProtocol().length();
     }
 
-//    public String convertToShortUrl(UrlDto urlDto) {
-//        var url = new Url();
-//        url.setLongUrl(urlDto.getLongUrl());
-//        url.setCreatedDate(new Date());
-//        var entity = urlRepository.save(url);
-//
-//        return conversion.encode(entity.getId());
-//    }
-
-//    public String getOriginalUrl(String shortUrl) {
-//        var id = conversion.decode(shortUrl);
-//        var entity = urlRepository.findById(id)
-//                .orElseThrow(() -> new EntityNotFoundException("There is no entity with " + shortUrl));
-//
-//        return entity.getLongUrl();
-//    }
 }

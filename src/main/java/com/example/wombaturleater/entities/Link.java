@@ -1,8 +1,6 @@
 package com.example.wombaturleater.entities;
 
 
-
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -27,7 +25,6 @@ public class Link {
     private String longLink;
 
 
-
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
@@ -46,9 +43,10 @@ public class Link {
     public void setShortLink(String shortLink) {
         this.shortLink = shortLink;
     }
-//    @Transient
-//    private boolean expired; // Hibernate will ignore this field. default false.
 
+    // todo
+    //    @Transient
+    //    private boolean expired; // Hibernate will ignore this field. default false.
 
 
     public int getId() {
